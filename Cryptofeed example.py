@@ -33,8 +33,8 @@ async def book(t, receipt_timestamp):
     bids.columns = ['Price', 'Size']
     asks.columns = ['Price', 'Size']
 
-    # # for price in ob.book.bids:
-    # #     print(f"{i} - Price: {price} Size: {ob.book.bids[price]}")
+    # for price in ob.book.bids:
+    #     print(f"{i} - Price: {price} Size: {ob.book.bids[price]}")
 
     print(f'Asks: \n{asks}\n')
     print(f'Bids: \n{bids}')
@@ -51,12 +51,7 @@ async def book(t, receipt_timestamp):
 
 def main():
     f = FeedHandler()
-    # f.add_feed(Coinbase(symbols=[f'{val1}-{val2}'], channels=[TRADES, TICKER, L2_BOOK], callbacks={TICKER: ticker, TRADES: trade, L2_BOOK: book}, max_depth=10,))
-    # f.add_feed(BinanceUS(symbols=[f'{val1}-{val2}'], channels=[L2_BOOK], callbacks={L2_BOOK: BookMongo('BinanceUSbtcusdt', collection='binanceus orderbook'),},))
     f.add_feed(BinanceUS(symbols=[f'{val1}-{val2}'], channels=[L2_BOOK], callbacks={L2_BOOK: book,},))
-    #'mongodb://localhost:27017/'
-    # dont put any spaces in the database name, the database and collection name must together be kinda short or else it wont work.
-    # its kinda wonky but just work with it lol
     f.run()
     
 if __name__ == '__main__':
